@@ -1,6 +1,3 @@
-Sure! Here’s the updated `README.md` with your name added as the author:
-
-````markdown
 # TypeScript Concepts
 
 This repository covers various TypeScript concepts including basic types, advanced types, functions, object manipulation, and modern JavaScript features. Below you'll find examples and explanations for each of these concepts.
@@ -38,7 +35,6 @@ let isEmployed: boolean = true;
 let middleName: null = null;
 let lastName: undefined = undefined;
 ```
-````
 
 ---
 
