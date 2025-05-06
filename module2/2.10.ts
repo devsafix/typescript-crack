@@ -1,8 +1,7 @@
 {
-  //
-  // utility types
+  // ------------------ Utility Types in TypeScript ------------------
 
-  // Pick Type
+  // Define a base Person type
   type Person = {
     name: string;
     age: number;
@@ -10,50 +9,81 @@
     phone: string;
   };
 
-  type Name = Pick<Person, "name">; // { name: string }
-  type NameAndEmail = Pick<Person, "name" | "email">; // { name: string; email?: string; }
+  // ------------------ 1. Pick ------------------
+  // Extract specific keys from a type
 
-  // Omit Type
-  type ContactInfo = Omit<Person, "name" | "age">; // { email?: string; phone: string; }
+  type NameOnly = Pick<Person, "name">;
+  // Result: { name: string }
 
-  //   Required Type
-  type PersonWithRequired = Required<Person>; // { name: string; age: number; email: string; phone: string; }
+  type NameAndEmail = Pick<Person, "name" | "email">;
+  // Result: { name: string; email?: string }
 
-  //   Partial Type
-  type PersonWithOptional = Partial<Person>; // { name?: string; age?: number; email?: string; phone?: string; }
+  // ------------------ 2. Omit ------------------
+  // Remove specific keys from a type
 
-  //   Readonly Type
-  type ReadonlyPerson = Readonly<Person>; // { readonly name: string; readonly age: number; readonly email?: string; readonly phone: string; }
+  type ContactInfo = Omit<Person, "name" | "age">;
+  // Result: { email?: string; phone: string }
+
+  // ------------------ 3. Required ------------------
+  // Makes all properties required (no optional `?`)
+
+  type PersonWithRequired = Required<Person>;
+  // Result: { name: string; age: number; email: string; phone: string }
+
+  // ------------------ 4. Partial ------------------
+  // Makes all properties optional
+
+  type PersonWithOptional = Partial<Person>;
+  // Result: { name?: string; age?: number; email?: string; phone?: string }
+
+  // ------------------ 5. Readonly ------------------
+  // Makes all properties readonly
+
+  type ReadonlyPerson = Readonly<Person>;
+  // Result: { readonly name: string; readonly age: number; readonly email?: string; readonly phone: string }
+
   type ReadonlyPersonWithRequired = Required<Readonly<Person>>;
-  const person: Person = {
-    name: "John Doe",
-    age: 30,
-    email: "ssdada",
-    phone: "123-456-7890",
-  };
+  // All properties are readonly and required
 
-  person.name = "Jane Doe"; // Error: Cannot assign to 'name' because it is a read-only property.
+  // ------------------ 6. Record ------------------
+  // Creates an object type with specific keys and value types
 
-  //  Record Type
-  type myObj = {
+  // Example: fixed keys with known types
+  type MyObject = {
     a: string;
     b: number;
   };
 
-  const obj1: myObj = {
+  const obj1: MyObject = {
     a: "a",
     b: 1,
   };
 
-  type myobj2 = Record<string, string>;
+  // Example: dynamic string keys, all values must be strings
+  type MyObject2 = Record<string, string>;
 
-  const obj2: myobj2 = {
-    a: "a",
-    b: "1",
+  const obj2: MyObject2 = {
+    a: "alpha",
+    b: "beta",
+    c: "gamma",
   };
 
+  // Example: values of unknown type (safe for flexible structures)
   const emptyObj: Record<string, unknown> = {};
-  emptyObj.a = "a"; // OK
+  emptyObj.a = "any value"; // OK
+  emptyObj.b = 123; // OK
 
-  //
+  // ------------------ Example Usage ------------------
+
+  // Valid Person
+  const person: Person = {
+    name: "John Doe",
+    age: 30,
+    email: "john@example.com",
+    phone: "123-456-7890",
+  };
+
+  // Trying to mutate a ReadonlyPerson would cause an error:
+  // const readonlyPerson: ReadonlyPerson = person;
+  // readonlyPerson.name = "Jane"; ❌ Error (uncomment to see error)
 }
