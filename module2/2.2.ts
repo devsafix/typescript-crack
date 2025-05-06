@@ -1,62 +1,87 @@
 {
-  //
+  // Demonstrating the use of 'type' and 'interface' in TypeScript
 
-  // interface learning
+  // ---------------------- Using 'type' ----------------------
 
-  // when type
-  type User1 = {
+  // Define a user type using 'type'
+  type UserType = {
     name: string;
     age: number;
   };
-  const user1: User1 = {
+
+  // Create an instance of UserType
+  const user1: UserType = {
     name: "John",
     age: 30,
   };
 
-  type UserWithRole1 = User1 & {
+  // Extend the UserType with an additional 'role' property using intersection
+  type UserWithRoleType = UserType & {
     role: string;
   };
 
-  const user3: UserWithRole1 = {
+  // Create an instance of the extended type
+  const userWithRole1: UserWithRoleType = {
     name: "John",
     age: 30,
     role: "admin",
   };
 
-  // when interface
-  interface User2 {
+  // -------------------- Using 'interface' --------------------
+
+  // Define a user interface
+  interface UserInterface {
     name: string;
     age: number;
   }
-  const user2: User2 = {
+
+  // Create an instance of UserInterface
+  const user2: UserInterface = {
     name: "Doe",
     age: 30,
   };
 
-  interface UserWithRole2 extends User2 {
+  // Extend the UserInterface using 'extends'
+  interface UserWithRoleInterface extends UserInterface {
     role: string;
   }
-  const user4: UserWithRole2 = {
+
+  // Create an instance of the extended interface
+  const userWithRole2: UserWithRoleInterface = {
     name: "Doe",
     age: 30,
     role: "admin",
   };
 
-  type Roll1 = number[];
-  const roll: Roll1 = [1, 2, 3, 4, 5];
+  // ------------------ Array and Index Signatures ------------------
 
-  interface Roll2 {
+  // Define a number array using 'type'
+  type RollNumbersType = number[];
+
+  // Initialize an array using the type alias
+  const rollNumbers1: RollNumbersType = [1, 2, 3, 4, 5];
+
+  // Define a number array using an interface with index signature
+  interface RollNumbersInterface {
     [index: number]: number;
   }
-  const roll2: Roll2 = [1, 2, 3, 4, 5];
 
-  type Add = (a: number, b: number) => number;
-  const add: Add = (a, b) => a + b;
+  // Initialize an array using the interface
+  const rollNumbers2: RollNumbersInterface = [1, 2, 3, 4, 5];
 
-  interface Add2 {
+  // ------------------ Function Types ------------------
+
+  // Define a function type using 'type'
+  type AddFunctionType = (a: number, b: number) => number;
+
+  // Implement the function
+  const addNumbers1: AddFunctionType = (a, b) => a + b;
+
+  // Define a function type using 'interface'
+  interface AddFunctionInterface {
     (a: number, b: number): number;
   }
-  const add2: Add2 = (a, b) => a + b;
 
-  //
+  // Implement the function
+  const addNumbers2: AddFunctionInterface = (a, b) => a + b;
 }
