@@ -1,3 +1,4 @@
+````markdown
 # TypeScript Concepts
 
 This repository covers various TypeScript concepts including basic types, advanced types, functions, object manipulation, and modern JavaScript features. Below you'll find examples and explanations for each of these concepts.
@@ -12,6 +13,11 @@ This repository covers various TypeScript concepts including basic types, advanc
 6. [Union and Intersection Types](#union-and-intersection-types)
 7. [Nullish Coalescing, Optional Chaining, and Ternary Operator](#nullish-coalescing-optional-chaining-and-ternary-operator)
 8. [Nullable Types, Unknown, and Never Types](#nullable-types-unknown-and-never-types)
+9. [Mapped Types](#mapped-types)
+10. [Utility Types](#utility-types)
+11. [Generics](#generics)
+12. [Asynchronous Programming in TypeScript](#asynchronous-programming-in-typescript)
+13. [Constraints in TypeScript](#constraints-in-typescript)
 
 ---
 
@@ -35,6 +41,7 @@ let isEmployed: boolean = true;
 let middleName: null = null;
 let lastName: undefined = undefined;
 ```
+````
 
 ---
 
@@ -249,6 +256,100 @@ The **`never` type** is used for functions that never return a value (e.g., thro
 function throwError(message: string): never {
   throw new Error(message);
 }
+```
+
+---
+
+## Mapped Types
+
+Mapped types allow you to create new types by transforming properties of another type. For example, converting all properties of a type from `number` to `string`.
+
+```typescript
+type AreaNumber = {
+  height: number;
+  width: number;
+};
+
+type AreaString = {
+  [K in keyof AreaNumber]: string; // mapped type
+};
+```
+
+---
+
+## Utility Types
+
+TypeScript provides several built-in utility types that are useful for transforming types.
+
+- `Pick<T, K>`: Selects a subset of properties from `T`.
+- `Omit<T, K>`: Removes properties from `T`.
+- `Required<T>`: Makes all properties of `T` required.
+- `Partial<T>`: Makes all properties of `T` optional.
+- `Readonly<T>`: Makes all properties of `T` readonly.
+- `Record<K, T>`: Creates a type with specific keys and values.
+
+---
+
+## Generics
+
+Generics allow you to create reusable types that can work with any type.
+
+```typescript
+const createArray = <T>(param: T): T[] => {
+  return [param];
+};
+
+const stringArray = createArray("hello");
+const numberArray = createArray(1);
+```
+
+---
+
+## Asynchronous Programming in TypeScript
+
+TypeScript supports asynchronous programming with `Promises` and `async/await`.
+
+### Promises:
+
+```typescript
+const createPromise = (): Promise<string> => {
+  return new Promise<string>((resolve, reject) => {
+    const data: string = "Hello, World!";
+    if (data) {
+      resolve(data);
+    } else {
+      reject("No data found");
+    }
+  });
+};
+```
+
+### Async/Await:
+
+```typescript
+const showData = async (): Promise<string> => {
+  try {
+    const data = await createPromise();
+    return data;
+  } catch (error) {
+    return "Error occurred";
+  }
+};
+```
+
+---
+
+## Constraints in TypeScript
+
+Generics can be constrained to specific types using `extends`.
+
+```typescript
+const addCourseToStudent = <T extends { id: number; name: string }>(
+  student: T
+) => {
+  const course = "NLWD";
+  return { ...student, course };
+};
 ```
 
 ---
