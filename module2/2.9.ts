@@ -1,37 +1,44 @@
 {
-  //
-  // mapped types
+  // ------------------ Mapped Types in TypeScript ------------------
 
+  // Basic Example: Mapping number array to string array
   const arrOfNumbers: number[] = [1, 2, 3, 4, 5];
-  // const arrOfStrings: string[] = ['a', 'b', 'c', 'd', 'e'];
-  // const arrOfBooleans: boolean[] = [true, false, true, false, true];
 
+  // Convert each number to a string using map
   const arrOfStrings: string[] = arrOfNumbers.map((num) => num.toString());
 
+  // ------------------ Mapped Types with Objects ------------------
+
+  // Original type with number values
   type AreaNumber = {
     height: number;
     width: number;
   };
 
-  //   type AreaString = {
-  //     height: string;
-  //     width: string;
-  //   };
-
+  // Mapped type: transforms all properties to `string`
   type AreaString = {
-    [K in keyof AreaNumber]: string; // mapped type
+    [K in keyof AreaNumber]: string;
   };
 
-  type AreaString2<T> = {
+  // Resulting type:
+  // type AreaString = {
+  //   height: string;
+  //   width: string;
+  // }
+
+  // ------------------ Generic Mapped Type ------------------
+
+  // Reusable generic mapped type that mirrors structure of input type
+  type CopyType<T> = {
     [K in keyof T]: T[K];
   };
-  const area1: AreaString2<{
+
+  // Usage example
+  const area1: CopyType<{
     height: string;
     width: number;
   }> = {
-    height: "100",
-    width: 50,
+    height: "100", // string
+    width: 50, // number
   };
-
-  //
 }
