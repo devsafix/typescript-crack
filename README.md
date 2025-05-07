@@ -40,6 +40,7 @@ let isEmployed: boolean = true;
 let middleName: null = null;
 let lastName: undefined = undefined;
 ```
+
 ---
 
 ## Functions
@@ -359,4 +360,4 @@ This repository contains essential TypeScript concepts that will help you build 
 
 ## Author
 
-**Kawser Ferdous Safi**
+**Kawser Ferdous Safi** – [devsafix.vercel.app](https://devsafix.vercel.app)
