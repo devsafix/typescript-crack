@@ -1,4 +1,4 @@
-## ✅ TypeScript Tasks — Full Solutions
+## ✅ TypeScript Tasks — Full Solutions with Explanations and Examples
 
 ### Task 1: Basic Data Types and First Program
 
@@ -8,6 +8,8 @@ console.log(
   "Hello World, I will complete this course successfully and become a Next level Web Developer!"
 );
 ```
+
+> ✅ This task demonstrates how to run a simple TypeScript program using `tsc` or a bundler like Vite. No types used yet, just a motivational log!
 
 ---
 
@@ -19,10 +21,15 @@ function describeUser(
   name: string,
   age: number,
   role?: "admin" | "user" | "guest"
-) {
+): void {
   console.log(`Name: ${name}, Age: ${age}, Role: ${role ?? "not specified"}`);
 }
+
+describeUser("Alice", 25, "admin");
+describeUser("Bob", 30);
 ```
+
+> ✅ Covers basic function typing, optional parameters (`?`), and literal types (restricting to specific string values).
 
 ---
 
@@ -55,11 +62,13 @@ const person: Person = {
   hobbies: ["reading", "coding"],
   familyMembers: ["Alice", "Bob"],
   job: "Engineer",
-  skills: ["TS", "React"],
+  skills: ["TypeScript", "React"],
   maritalStatus: "single",
   friends: ["Max", "Leo"],
 };
 ```
+
+> ✅ Demonstrates creating a complex custom object type with arrays and literal union types.
 
 ---
 
@@ -77,9 +86,19 @@ interface Magazine {
   editor: string;
 }
 
-type Publication = Book | Magazine;
-type DetailedPublication = Book & Magazine;
+type Publication = Book | Magazine; // Union
+type DetailedPublication = Book & Magazine; // Intersection
+
+const pub1: Publication = { title: "TS Guide", author: "Dev" };
+const pub2: DetailedPublication = {
+  title: "Tech Monthly",
+  author: "Editor A",
+  issue: 42,
+  editor: "Editor B",
+};
 ```
+
+> ✅ Union lets you use either type; intersection requires all fields from both.
 
 ---
 
@@ -90,7 +109,11 @@ type DetailedPublication = Book & Magazine;
 function reverseString(str: string): string {
   return str.split("").reverse().join("");
 }
+
+console.log(reverseString("TypeScript"));
 ```
+
+> ✅ A simple typed function returning a string. Good for practicing pure functions.
 
 ---
 
@@ -101,7 +124,15 @@ function reverseString(str: string): string {
 function sumAll(...numbers: number[]): number {
   return numbers.reduce((acc, val) => acc + val, 0);
 }
+
+const nums = [10, 20, 30];
+console.log(sumAll(...nums)); // Using spread
+
+const user = { name: "Alice", age: 25 };
+const { name, age } = user; // Destructuring
 ```
+
+> ✅ Shows both rest (`...args`) and spread (`...array`) usage with destructuring.
 
 ---
 
@@ -116,7 +147,12 @@ function processInput(input: string | number): number {
     return input * input;
   }
 }
+
+const strLen = processInput("Hello");
+const squared = processInput(4);
 ```
+
+> ✅ Demonstrates type narrowing using `typeof`.
 
 ---
 
@@ -129,10 +165,18 @@ type Admin = { adminLevel: number };
 
 type AdminUser = User & Admin;
 
+const admin: AdminUser = {
+  name: "Sara",
+  email: "sara@example.com",
+  adminLevel: 2,
+};
+
 function describeAdmin(user: AdminUser): string {
   return `${user.name} is an admin with level ${user.adminLevel}`;
 }
 ```
+
+> ✅ Combines multiple types into one using intersection (`&`).
 
 ---
 
@@ -143,7 +187,12 @@ function describeAdmin(user: AdminUser): string {
 function getEmployeeCity(employee: any): string | undefined {
   return employee?.address?.city;
 }
+
+const emp = { name: "Sam", address: { city: "NY" } };
+const city = getEmployeeCity(emp);
 ```
+
+> ✅ Safe navigation through nested objects using `?.`.
 
 ---
 
@@ -154,7 +203,11 @@ function getEmployeeCity(employee: any): string | undefined {
 function getDisplayName(name: string | null | undefined): string {
   return name ?? "Anonymous";
 }
+
+console.log(getDisplayName(undefined)); // => "Anonymous"
 ```
+
+> ✅ `??` only falls back if the value is `null` or `undefined` (not `""` or `0`).
 
 ---
 
@@ -166,10 +219,12 @@ function processData(data: unknown): string | number | undefined {
   if (typeof data === "string") {
     return data.toUpperCase();
   } else if (typeof data === "number") {
-    return data * data;
+    return data * 2;
   }
 }
 ```
+
+> ✅ `unknown` is safer than `any`, requiring type checks before use.
 
 ---
 
@@ -182,6 +237,8 @@ function handleError(message: string): never {
 }
 ```
 
+> ✅ `never` is used when a function never returns (e.g., throws an error).
+
 ---
 
 ### Task 13: Generics with Functions and Interfaces
@@ -191,7 +248,12 @@ function handleError(message: string): never {
 function removeDuplicates<T>(arr: T[]): T[] {
   return [...new Set(arr)];
 }
+
+const uniqueNums = removeDuplicates([1, 2, 2, 3, 1]);
+const uniqueStrs = removeDuplicates(["a", "b", "a"]);
 ```
+
+> ✅ `T` is a placeholder for any type. Generics make functions reusable for all types.
 
 ---
 
@@ -211,7 +273,11 @@ async function fetchUser(): Promise<UserData> {
     }, 1000);
   });
 }
+
+fetchUser().then((data) => console.log(data));
 ```
+
+> ✅ Demonstrates async/await and typing a `Promise`.
 
 ---
 
@@ -232,6 +298,8 @@ function printUpperCase(value: unknown): void {
 }
 ```
 
+> ✅ Custom type guards narrow unknown types safely for logic.
+
 ---
 
 ### Task 16: Utility Types and Keyof Constraints
@@ -241,6 +309,11 @@ function printUpperCase(value: unknown): void {
 function getPropertyValue<T, K extends keyof T>(obj: T, key: K): T[K] {
   return obj[key];
 }
+
+const car = { brand: "Toyota", year: 2022 };
+const brand = getPropertyValue(car, "brand"); // Valid
 ```
+
+> ✅ `keyof` ensures keys passed to the function exist on the object.
 
 ---
